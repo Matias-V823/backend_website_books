@@ -1,11 +1,15 @@
 package cl.ucm.bookapi.ApiBook.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "book")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Fine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

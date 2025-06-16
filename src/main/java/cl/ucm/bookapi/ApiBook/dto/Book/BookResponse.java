@@ -3,7 +3,7 @@ package cl.ucm.bookapi.ApiBook.dto.Book;
 import cl.ucm.bookapi.ApiBook.models.Book;
 
 public record BookResponse(
-        Integer idBook,
+        Long idBook,
         String title,
         String author,
         String type,

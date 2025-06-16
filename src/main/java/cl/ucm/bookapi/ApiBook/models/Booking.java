@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idBooking;
+    private Long idBooking;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "copybook_fk")
     private CopyBook copybookFk;

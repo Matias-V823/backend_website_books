@@ -1,35 +1,46 @@
 package cl.ucm.bookapi.ApiBook.services;
 
 import cl.ucm.bookapi.ApiBook.dto.Book.BookRequest;
-import cl.ucm.bookapi.ApiBook.dto.Book.BookResponse;
 import cl.ucm.bookapi.ApiBook.models.Book;
 import cl.ucm.bookapi.ApiBook.models.Booking;
 import cl.ucm.bookapi.ApiBook.models.CopyBook;
 import cl.ucm.bookapi.ApiBook.repository.BookRepository;
+import cl.ucm.bookapi.ApiBook.repository.CopyBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class BookService implements BookServiceI{
     private final BookRepository bookRepository;
+    private final CopyBookRepository copyBookRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository){
+    public BookService(
+            BookRepository bookRepository,
+            CopyBookRepository copyBookRepository
+    ){
         this.bookRepository = bookRepository;
+        this.copyBookRepository = copyBookRepository;
     }
 
     @Override
-    public Page<BookResponse> getAllBooks(Pageable pageable) {
-        Page<Book> books = bookRepository.findAll(pageable);
-        return books.map(BookResponse::new);
+    public Page<Book> getAllBooks(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 
     @Override
-    public Page<BookResponse> getBookByType(Pageable pageable, String type) {
-        return null;
+    public Page<Book> getBookByType(Pageable pageable, String type) {
+        return bookRepository.findByType(pageable, type);
+    }
+
+    @Override
+    public Page<Book> findBookByTitle(Pageable pageable, String title) {
+        return bookRepository.findByTitleContainingIgnoreCase(pageable, title);
     }
 
     @Override
@@ -38,13 +49,12 @@ public class BookService implements BookServiceI{
     }
 
     @Override
-    public Book findBookByTitle(String title) {
-        return null;
-    }
-
-    @Override
-    public CopyBook newCopyBook(Integer idBook) {
-        return null;
+    public CopyBook newCopyBook(Long idBook) {
+        Optional<Book> book = bookRepository.findById(idBook);
+        if (!book.isPresent()) {
+            return null;
+        }
+        return copyBookRepository.save(new CopyBook(book.get()));
     }
 
     @Override

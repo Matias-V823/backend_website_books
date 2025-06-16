@@ -13,9 +13,16 @@ import lombok.NoArgsConstructor;
 public class CopyBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCopybook;
+    private Long idCopybook;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_fk")
-    private Book BookFk;
+    private Book Book;
     private Boolean state;
+
+    public CopyBook(
+            Book book
+    ){
+        this.Book = book;
+        this.state = Boolean.TRUE;
+    }
 }

@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "book")
+@Table(name = "fine")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idFine;
+    private Long idFine;
     private Integer amount;
     private String description;
     private Boolean state;

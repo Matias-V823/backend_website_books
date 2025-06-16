@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idBook;
+    private Long idBook;
     private String author;
     private String title;
     private String type;

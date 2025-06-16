@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Override
     Page<Book> findAll(Pageable pageable);
+    Page<Book> findByType(Pageable pageable, String type);
+    Page<Book> findByTitleContainingIgnoreCase(Pageable pageable, String title);
 }

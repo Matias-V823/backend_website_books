@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtUtil {
     private final Algorithm ALGORITHM;
+    private String jwtSecret;
 
     public JwtUtil(@Value("${api.security.secret}") String secretKey) {
         this.ALGORITHM = Algorithm.HMAC256(secretKey);

@@ -16,13 +16,13 @@ public class CopyBook {
     private Long idCopybook;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_fk")
-    private Book Book;
+    private Book book;
     private Boolean state;
 
     public CopyBook(
             Book book
     ){
-        this.Book = book;
+        this.book = book;
         this.state = Boolean.TRUE;
     }
 }

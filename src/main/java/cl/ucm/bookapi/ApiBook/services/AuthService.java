@@ -54,8 +54,6 @@ public class AuthService implements AuthServiceI {
     public LoginResponse login(LoginRequest loginRequest) {
         User user = userRepository.findById(loginRequest.username())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
 
         if (!passwordEncoder.matches(loginRequest.password(), user.getPassword())) {
             throw new RuntimeException("Contraseña Incorrecta");
@@ -66,7 +64,6 @@ public class AuthService implements AuthServiceI {
         }
 
         String token = jwtUtil.create(user);
-        System.out.println("JWT generado: " + token);
         return new LoginResponse(user, token);
     }
 }

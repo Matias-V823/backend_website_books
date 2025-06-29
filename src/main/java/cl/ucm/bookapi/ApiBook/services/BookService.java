@@ -2,11 +2,9 @@ package cl.ucm.bookapi.ApiBook.services;
 
 import cl.ucm.bookapi.ApiBook.dto.Book.BookRequest;
 import cl.ucm.bookapi.ApiBook.models.Book;
-import cl.ucm.bookapi.ApiBook.models.Booking;
 import cl.ucm.bookapi.ApiBook.models.CopyBook;
 import cl.ucm.bookapi.ApiBook.repository.BookRepository;
 import cl.ucm.bookapi.ApiBook.repository.CopyBookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,6 @@ public class BookService implements BookServiceI{
     private final BookRepository bookRepository;
     private final CopyBookRepository copyBookRepository;
 
-    @Autowired
     public BookService(
             BookRepository bookRepository,
             CopyBookRepository copyBookRepository
@@ -58,7 +55,7 @@ public class BookService implements BookServiceI{
     }
 
     @Override
-    public Booking bookReserve(String title) {
-        return null;
+    public Page<CopyBook> copyBookByTitle(Pageable pageable, String title) {
+        return copyBookRepository.findByBookTitleContainingIgnoreCase(pageable, title);
     }
 }

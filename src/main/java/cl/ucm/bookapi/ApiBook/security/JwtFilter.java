@@ -50,7 +50,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // 4. Cargar al usuario en el contexto de seguridad.
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                user.getUsername(), user.getPassword(), user.getAuthorities()
+                user, null, user.getAuthorities()
         );
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);

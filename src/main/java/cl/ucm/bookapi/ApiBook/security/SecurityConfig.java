@@ -30,7 +30,17 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(config -> config.configurationSource(corsConfigurationSource))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/book/**", "/api/auth/**").permitAll()
+                        .requestMatchers("/api/book/all", "/api/book/all/**", "/api/auth/**").permitAll()
+                        .requestMatchers(
+                                "/api/booking/new",
+                                "/api/booking/return",
+                                "/api/reader/**",
+                                "/api/book/new",
+                                "/api/book/copy/**",
+                                "/api/book/newcopy/**",
+                                "/api/book/find/**",
+                                "/api/"
+                        ).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(

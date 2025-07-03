@@ -6,6 +6,7 @@ import cl.ucm.bookapi.ApiBook.dto.CopyBook.CopyBookResponse;
 import cl.ucm.bookapi.ApiBook.models.Book;
 import cl.ucm.bookapi.ApiBook.models.CopyBook;
 import cl.ucm.bookapi.ApiBook.services.BookService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -86,6 +87,7 @@ public class BookController  {
     }
 
     @GetMapping("/copy/{title}")
+    @Transactional
     ResponseEntity<Page<CopyBookResponse>> getCopies(
             @PathVariable String title,
             Pageable pageable

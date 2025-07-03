@@ -39,6 +39,7 @@ public class SecurityConfig {
                                 "/api/book/copy/**",
                                 "/api/book/newcopy/**",
                                 "/api/book/find/**",
+                                "/api/book/copy/**",
                                 "/api/"
                         ).hasRole("ADMIN")
                         .anyRequest().authenticated()

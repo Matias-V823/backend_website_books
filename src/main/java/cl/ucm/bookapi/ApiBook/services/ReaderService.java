@@ -37,6 +37,7 @@ public class ReaderService implements ReaderServiceI{
         Boolean state = reader.get().getState();
         reader.get().setState(!state);
 
-        return new ReaderResponse(reader.get());
+
+        return new ReaderResponse(userRepository.save(reader.get()));
     }
 }

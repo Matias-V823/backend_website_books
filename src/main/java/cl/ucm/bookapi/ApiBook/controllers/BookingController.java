@@ -4,6 +4,7 @@ import cl.ucm.bookapi.ApiBook.dto.Booking.BookingRequest;
 import cl.ucm.bookapi.ApiBook.dto.Booking.BookingResponse;
 import cl.ucm.bookapi.ApiBook.dto.Booking.BookingReturnResponse;
 import cl.ucm.bookapi.ApiBook.services.BookingService;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,9 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.CREATED).body(bookingResponse);
     }
 
+
     @GetMapping("/find/{email}")
+    @Transactional
     public  ResponseEntity<Page<BookingResponse>> getBookingByEmail(
             @PathVariable String email,
             Pageable pageable
